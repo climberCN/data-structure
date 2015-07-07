@@ -11,7 +11,7 @@ int IsLast( Position P, List L );
 Position Find( Elem X, List L );
 void Delete( Elem X, List L );
 Position FindPrevious( Elem X, List L );
-void Insert( Elem X, List L, Position P );
+int Insert( Elem X, List L, Position P );
 void DeleteList( List L );
 Position Header( List L );
 Position First( List L );

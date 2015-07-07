@@ -18,20 +18,37 @@ Position Find( Elem X, List L ){
     Position P;
     P = L->Next;
     while( P->Next != NULL && P->Elem != X ){
-        P = P->Next
+        P = P->Next;
+    }
+    if( P->Next != X ){
+        return NULL;
     }
     return P;
 }
 
 void Delete( Elem X, List L ){
     Position P,Pre;
-    P = L->Next;
-    Pre = L;
-    while( P->Elem != X && P->Next != NULL){
-        Pre = Pre->Next;
+    Pre = FindPrevious( Elem X, List L );
+    if( Pre == NULL ){
+        return 0;
+    }
+    P = Pre->Next;
+    Pre->Next = P->Next;
+    free(P);
+}
+
+Position FindPrevious( Elem X, List L ){
+    Position P;
+    P = L;
+    while( P->Next != NULL && P->Next->Elem != X )
         P = P->Next;
-    }
-    if ( P->Elem == X ){
-        Pre->Next = P->Next;
-    }
+    if( P->Elem != X )
+        return NULL;
+    return P;
+}
+
+int Insert( Elem X, List L, Position P ){
+    Position Tmp;
+    Tmp = malloc( sizeof( struct Node ) );
+    if ()
 }
