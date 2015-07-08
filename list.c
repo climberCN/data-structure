@@ -1,7 +1,9 @@
 #include "list.h"
+#include <stdlib.h>
+
 
 struct Node{
-    Elem Element;
+    Elem Elem;
     Position Next;
 };
 
@@ -20,13 +22,13 @@ Position Find( Elem X, List L ){
     while( P->Next != NULL && P->Elem != X ){
         P = P->Next;
     }
-    if( P->Next != X ){
+    if( P->Elem != X ){
         return NULL;
     }
     return P;
 }
 
-void Delete( Elem X, List L ){
+int Delete( Elem X, List L ){
     Position P,Pre;
     Pre = FindPrevious( Elem X, List L );
     if( Pre == NULL ){
@@ -35,6 +37,7 @@ void Delete( Elem X, List L ){
     P = Pre->Next;
     Pre->Next = P->Next;
     free(P);
+    return 0;
 }
 
 Position FindPrevious( Elem X, List L ){
@@ -52,13 +55,13 @@ int Insert( Elem X, List L, Position P ){
     Tmp = malloc( sizeof( struct Node ) );
     if ( Tmp == NULL)
         return -1;
-    Pre = FindPrevious( P, L );
+    Pre = FindPreviou( P, L );
     Tmp->Next = Pre->Next;
     Pre->Next = P;
     return 0;
 }
 
-Position FindPrevious( Position P, List L ){
+Position FindPreviou( Position P, List L ){
     Position Pre;
     Pre = L;
     while( Pre->Next != NULL && Pre->Next != P ){
@@ -73,11 +76,45 @@ List MakeEmpty( List L ){
     Position Pre, P;
     Pre = L->Next;
     if (Pre == NULL)
-        return -1;
+        return L;
     P = Pre->Next;
-    while( p != NULL){
+    while( P != NULL){
         free(Pre);
         Pre = P;
         P = P->Next;
     }
+    free(Pre);
+    return L;
 }
+
+int DeleteList(List L){
+    Position Pre, P;
+    Pre = L;
+    if (Pre == NULL)
+        return -1;
+    P = Pre->Next;
+    while( P != NULL){
+        free(Pre);
+        Pre = P;
+        P = P->Next;
+    }
+    free(Pre);    
+    return 0;
+}
+
+Position Header(List L){
+    return L;
+}
+
+Position First(List L){
+    return L->Next;
+}
+
+Position Advance( Position P ){
+    return P->Next;
+}
+
+Elem Retrive( Position P ){
+    return P->Elem;
+}
+
