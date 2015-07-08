@@ -48,7 +48,36 @@ Position FindPrevious( Elem X, List L ){
 }
 
 int Insert( Elem X, List L, Position P ){
-    Position Tmp;
+    Position Tmp,Pre;
     Tmp = malloc( sizeof( struct Node ) );
-    if ()
+    if ( Tmp == NULL)
+        return -1;
+    Pre = FindPrevious( P, L );
+    Tmp->Next = Pre->Next;
+    Pre->Next = P;
+    return 0;
+}
+
+Position FindPrevious( Position P, List L ){
+    Position Pre;
+    Pre = L;
+    while( Pre->Next != NULL && Pre->Next != P ){
+        Pre = Pre->Next;
+    }
+    if ( Pre->Next  == P )
+        return Pre;
+    return NULL;
+}
+
+List MakeEmpty( List L ){
+    Position Pre, P;
+    Pre = L->Next;
+    if (Pre == NULL)
+        return -1;
+    P = Pre->Next;
+    while( p != NULL){
+        free(Pre);
+        Pre = P;
+        P = P->Next;
+    }
 }
