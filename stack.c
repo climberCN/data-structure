@@ -20,18 +20,44 @@ Stack CreateStack( void ){
 }
 
 void Push( Elem e, Stack S ){
-   PtrToNode p = getTop( S );
-   PtrToNode new = malloc( sizeof( Node ));
-   new->Elem = e;
-   p->Next = new;
-   new->Pre = p;
-   new->Next = NULL;
+   PtrToNode top = getTop( S );
+   PtrToNode newNode = malloc( sizeof( Node ));
+   newNode->Elem = e;
+   top->Next = newNode;
+   newNode->Pre = top;
+   newNode->Next = NULL;
 }
 
 PtrToNode getTop( Stack S ){
-    PtrToNode p;
-    p = S;
-    while( p->Next != NULL )
-        p = p->Next;
-    return p;
+    PtrToNode top;
+    top = S;
+    while( top->Next != NULL )
+        top = top->Next;
+    return top;
+}
+
+Elem Top( Stack S ){
+    PtrToNode top = getTop( S );
+    return top->Elem;
+}
+
+void Pop( Stack S ){
+    PtrToNode top = getTop( S );
+    PtrToNode Pre = top->Pre;
+    Pre->Next = NULL;
+    free(top);
+}
+
+void MakeEmpty( Stack S ){
+    PtrToNode Pre = S;
+    PtrToNode P = Pre->Next;
+    Pre->Next = NULL;
+    Pre = P;
+    P = P->Next;
+    while( Pre->Next != NULL ){
+        free( Pre );
+        Pre = P;
+        P = P->Next;
+    }
+    Pre = NULL;
 }
