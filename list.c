@@ -30,7 +30,7 @@ Position Find( Elem X, List L ){
 
 int Delete( Elem X, List L ){
     Position P,Pre;
-    Pre = FindPrevious( Elem X, List L );
+    Pre = FindPrevious( X, L );
     if( Pre == NULL ){
         return 0;
     }
@@ -118,3 +118,6 @@ Elem Retrive( Position P ){
     return P->Elem;
 }
 
+int main(){
+    return 0;
+}
