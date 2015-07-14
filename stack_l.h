@@ -5,7 +5,7 @@ typedef struct StackRecord *Stack;
 
 int IsEmpty( Stack S );
 int IsFull( Stack S );
-Stack CreateStack( int MaxElements );
+Stack CreateStack( int MaxElem );
 void DisposeStack( Stack S );
 void MakeEmpty( Stack S );
 void Push( Elem X, Stack S );

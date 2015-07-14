@@ -14,6 +14,8 @@ int IsEmpty( Stack S ){
 Stack CreateStack( void ){
     Stack S;
     S = malloc( sizeof( Node ) );
+    if ( S == NULL )
+        printf("malloc failed:(");
     S->Next = NULL;
     S->Pre = NULL;
     return S;
@@ -37,27 +39,41 @@ PtrToNode getTop( Stack S ){
 }
 
 Elem Top( Stack S ){
-    PtrToNode top = getTop( S );
-    return top->Elem;
+    if ( S ==NULL )
+        printf("Create Stack first:(");
+    else if( !IsEmpty( S ) )
+        printf("stack is empty");
+    else{
+        PtrToNode top = getTop( S );
+        return top->Elem;
+    }
 }
 
 void Pop( Stack S ){
-    PtrToNode top = getTop( S );
-    PtrToNode Pre = top->Pre;
-    Pre->Next = NULL;
-    free(top);
+    if ( S ==NULL )
+        printf("Create Stack first:(");
+    else if( !IsEmpty( S ) )
+        printf("stack is empty");
+    else{
+        PtrToNode top = getTop( S );
+        PtrToNode Pre = top->Pre;
+        Pre->Next = NULL;
+        free(top);
+    }
 }
 
 void MakeEmpty( Stack S ){
-    PtrToNode Pre = S;
-    PtrToNode P = Pre->Next;
-    Pre->Next = NULL;
-    Pre = P;
-    P = P->Next;
-    while( Pre->Next != NULL ){
-        free( Pre );
-        Pre = P;
-        P = P->Next;
+    if ( S ==NULL )
+        printf("createstack first:(");
+    else{
+        while( !IsEmpty() ){
+            Pop( S );
+        }
     }
-    Pre = NULL;
+}
+
+void DisposeStack( Stack S ){
+    MakeEmpty( S );
+    free( S );
+    S = NULL;
 }
